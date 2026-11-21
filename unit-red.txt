@@ -210,5 +210,5 @@ PASS tests/unit/core.test.js
 Test Suites: 1 failed, 1 passed, 2 total
 Tests:       10 failed, 28 passed, 38 total
 Snapshots:   0 total
-Time:        0.574 s, estimated 1 s
+Time:        0.422 s, estimated 1 s
 Ran all test suites matching tests/unit.
