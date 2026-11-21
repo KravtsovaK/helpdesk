@@ -1,0 +1,12 @@
+
+> isit4-autotest-helpdesk-lab@1.0.0 test:unit
+> jest tests/unit --runInBand
+
+PASS tests/unit/ticket-spec.test.js
+PASS tests/unit/core.test.js
+
+Test Suites: 2 passed, 2 total
+Tests:       38 passed, 38 total
+Snapshots:   0 total
+Time:        0.418 s, estimated 1 s
+Ran all test suites matching tests/unit.
