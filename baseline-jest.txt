@@ -1,0 +1,12 @@
+
+> isit4-autotest-helpdesk-lab@1.0.0 test
+> jest --runInBand
+
+PASS tests/integration/api.test.js
+PASS tests/unit/core.test.js
+
+Test Suites: 2 passed, 2 total
+Tests:       5 passed, 5 total
+Snapshots:   0 total
+Time:        0.556 s, estimated 1 s
+Ran all test suites.
