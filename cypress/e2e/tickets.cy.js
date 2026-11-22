@@ -82,4 +82,14 @@ describe('HelpDesk — E2E', () => {
       expect(win.__xss, 'код из заголовка не должен выполниться').to.be.undefined;
     });
   });
+
+  it('E-05: фильтр по приоритету через select', () => {
+    page.open();
+    page.setPriority('high');
+
+    page.count().should('have.text', '2');
+    page.titles().should('have.length', 2);
+    page.titles().should('contain.text', 'VPN недоступен');
+    page.titles().should('contain.text', 'Wi-Fi на этаже');
+  });
 });

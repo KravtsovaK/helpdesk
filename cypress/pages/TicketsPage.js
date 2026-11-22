@@ -13,5 +13,6 @@ export class TicketsPage {
   statusOf(id) { return this.ticket(id).find('.ticket-meta span').last(); }
   // Кнопка перехода статуса в карточке (у завершённой заявки её нет)
   actionButton(id) { return this.ticket(id).find('button'); }
+  setPriority(priority) { cy.get('[data-testid="priority-filter"]').select(priority); }
 }
 
