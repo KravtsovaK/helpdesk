@@ -14,5 +14,12 @@ export class TicketsPage {
   // Кнопка перехода статуса в карточке (у завершённой заявки её нет)
   actionButton(id) { return this.ticket(id).find('button'); }
   setPriority(priority) { cy.get('[data-testid="priority-filter"]').select(priority); }
+    // Открывает страницу и ждёт успешного ответа API со списком заявок
+    openAndWait() {
+    cy.visit('/');
+    // Ждём, пока счётчик перестанет быть «0» (данные пришли и отрисованы)
+    cy.get('[data-testid="ticket-count"]').should('not.have.text', '0');
+    cy.get('[data-testid="ticket-item"]').should('have.length.at.least', 1);
+  }
 }
 

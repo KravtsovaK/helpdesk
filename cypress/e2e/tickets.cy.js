@@ -11,7 +11,7 @@ describe('HelpDesk — E2E', () => {
   });
 
   it('показывает исходные заявки', () => {
-    page.open();
+    page.openAndWait();
     cy.get('[data-testid="page-title"]').should('contain', 'HelpDesk');
     page.items().should('have.length', 4);
     page.count().should('have.text', '4');
@@ -19,7 +19,7 @@ describe('HelpDesk — E2E', () => {
 
   it('E-01: создание заявки через форму', () => {
     cy.intercept('POST', '/api/tickets').as('create');
-    page.open();
+    page.openAndWait();
 
     form.fill({
       title: '  Сбой   VPN в корпусе ',
@@ -36,7 +36,7 @@ describe('HelpDesk — E2E', () => {
   });
 
   it('E-02: поиск и фильтры по статусу и категории', () => {
-    page.open();
+    page.openAndWait();
     page.searchFor('сети');
     page.setStatus('new');
     page.setCategory('network');
@@ -48,7 +48,7 @@ describe('HelpDesk — E2E', () => {
 
   it('E-03: перевод заявки в работу и завершение', () => {
     cy.intercept('PATCH', '/api/tickets/*/status').as('patch');
-    page.open();
+    page.openAndWait();
 
     page.statusOf(1).should('have.text', 'Новая');
 
@@ -67,7 +67,7 @@ describe('HelpDesk — E2E', () => {
     const title = `${marker} <img src=x onerror="window.__xss=1">`;
     const description = '<b>жирный</b> текст описания';
 
-    page.open();
+    page.openAndWait();
     form.fill({ title, description, category: 'software', priority: 'low' });
     form.submit();
     form.message().should('contain.text', 'создана');
@@ -84,7 +84,7 @@ describe('HelpDesk — E2E', () => {
   });
 
   it('E-05: фильтр по приоритету через select', () => {
-    page.open();
+    page.openAndWait();
     page.setPriority('high');
 
     page.count().should('have.text', '2');
