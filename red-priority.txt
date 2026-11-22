@@ -1,0 +1,29 @@
+
+> isit4-autotest-helpdesk-lab@1.0.0 test:integration
+> jest tests/integration --runInBand
+
+FAIL tests/integration/ticket-api.test.js
+  ● API заявок › I-08: фильтр priority=high возвращает только high, более новые выше
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    [0m [90m 100 |[39m
+     [90m 101 |[39m     expect(res[33m.[39mstatus)[33m.[39mtoBe([35m200[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 102 |[39m     expect(res[33m.[39mjson[33m.[39mitems[33m.[39mevery((t) [33m=>[39m t[33m.[39mpriority [33m===[39m [32m'high'[39m))[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m     |[39m                                                                [31m[1m^[22m[39m
+     [90m 103 |[39m     expect(res[33m.[39mjson[33m.[39mtotal)[33m.[39mtoBe([35m2[39m)[33m;[39m
+     [90m 104 |[39m     expect(res[33m.[39mjson[33m.[39mitems[33m.[39mmap((t) [33m=>[39m t[33m.[39mid))[33m.[39mtoEqual([[35m4[39m[33m,[39m [35m1[39m])[33m;[39m
+     [90m 105 |[39m   })[33m;[39m[0m
+
+      at Object.toBe (tests/integration/ticket-api.test.js:102:64)
+
+PASS tests/integration/api.test.js
+
+Test Suites: 1 failed, 1 passed, 2 total
+Tests:       1 failed, 8 passed, 9 total
+Snapshots:   0 total
+Time:        0.683 s, estimated 1 s
+Ran all test suites matching tests/integration.

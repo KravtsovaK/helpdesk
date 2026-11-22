@@ -94,4 +94,13 @@ describe('API заявок', () => {
     expect(res.json.items.map((t) => t.id)).toEqual([1]);
     expect(res.json.total).toBe(1);
   });
+    test('I-08: фильтр priority=high возвращает только high, более новые выше', async () => {
+    // В исходных данных high: заявка 1 (2026-10-01) и заявка 4 (2026-10-04)
+    const res = await call('GET', '/api/tickets?priority=high');
+
+    expect(res.status).toBe(200);
+    expect(res.json.items.every((t) => t.priority === 'high')).toBe(true);
+    expect(res.json.total).toBe(2);
+    expect(res.json.items.map((t) => t.id)).toEqual([4, 1]);
+  });
 });
