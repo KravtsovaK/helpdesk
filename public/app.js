@@ -13,6 +13,14 @@ const statusLabels = { new: 'Новая', in_progress: 'В работе', resolv
 const priorityLabels = { low: 'Низкий', medium: 'Средний', high: 'Высокий' };
 const categoryLabels = { hardware: 'Оборудование', software: 'ПО', network: 'Сеть' };
 let lastRequest = 0;
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 async function loadTickets() {
   const requestId = ++lastRequest;
@@ -34,8 +42,8 @@ async function loadTickets() {
       const action = ticket.status === 'resolved' ? '' :
         `<button data-id="${ticket.id}" data-next="${nextStatus}">${ticket.status === 'new' ? 'В работу' : 'Завершить'}</button>`;
       return `<li class="ticket" data-testid="ticket-item" data-id="${ticket.id}">
-        <h3 class="ticket-title">${ticket.title}</h3>
-        <p class="ticket-description">${ticket.description}</p>
+        <h3 class="ticket-title">${escapeHtml(ticket.title)}</h3>
+        <p class="ticket-description">${escapeHtml(ticket.description)}</p>
         <div class="ticket-meta"><span>${categoryLabels[ticket.category]}</span>
           <span>${priorityLabels[ticket.priority]}</span><span>${statusLabels[ticket.status]}</span></div>
         ${action}
