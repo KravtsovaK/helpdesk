@@ -49,26 +49,29 @@ function canChangeStatus(from, to) {
  * Условия поиска объединяются оператором AND.
  * В результирующем списке первыми должны идти важные и новые заявки.
  */
+function matchesFilters(ticket, f) {
+  if (f.priority && ticket.priority !== f.priority) return false;
+  if (f.status && ticket.status !== f.status) return false;
+  if (f.category && ticket.category !== f.category) return false;
+  if (!f.search) return true;
+  return ticket.title.toLowerCase().includes(f.search)
+    || ticket.description.toLowerCase().includes(f.search);
+}
+
+function compareTickets(a, b) {
+  const byPriority = PRIORITY_RANK[b.priority] - PRIORITY_RANK[a.priority];
+  if (byPriority !== 0) return byPriority;
+  return b.createdAt.localeCompare(a.createdAt);
+}
+
 function filterAndSort(tickets, filters = {}) {
-  const search = String(filters.search || '').trim().toLowerCase();
-  const status = String(filters.status || '').trim();
-  const category = String(filters.category || '').trim();
-  const priority = String(filters.priority || '').trim();
-  return tickets
-    .filter((ticket) => {
-      if (priority && ticket.priority !== priority) return false;
-      if (status && ticket.status !== status) return false;
-      if (category && ticket.category !== category) return false;
-      if (!search) return true;
-      const title = ticket.title.toLowerCase();
-      const description = ticket.description.toLowerCase();
-      return title.includes(search) || description.includes(search);
-    })
-    .sort((a, b) => {
-      const byPriority = PRIORITY_RANK[b.priority] - PRIORITY_RANK[a.priority];
-      if (byPriority !== 0) return byPriority;
-      return b.createdAt.localeCompare(a.createdAt);
-    });
+  const f = {
+    search: String(filters.search || '').trim().toLowerCase(),
+    status: String(filters.status || '').trim(),
+    category: String(filters.category || '').trim(),
+    priority: String(filters.priority || '').trim()
+  };
+  return tickets.filter((ticket) => matchesFilters(ticket, f)).sort(compareTickets);
 }
 
 module.exports = {
