@@ -1,0 +1,89 @@
+
+> isit4-autotest-helpdesk-lab@1.0.0 e2e
+> cypress run
+
+
+Warning: The allowCypressEnv configuration option is enabled. This allows any browser code to read values from Cypress.env(). This is insecure and will be removed in a future major version.
+
+1. Replace Cypress.env() calls with cy.env() (for sensitive values) or Cypress.expose() (for public configuration)
+2. Set allowCypressEnv: false in your Cypress configuration to disable Cypress.env()
+
+Learn more: https://on.cypress.io/cypress-env-migration
+
+
+====================================================================================================
+
+  (Run Starting)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Cypress:        15.21.2                                                                        │
+  │ Browser:        Electron 138 (headless)                                                        │
+  │ Node Version:   v22.17.0 (C:\Program Files\nodejs\node.exe)                                    │
+  │ Specs:          1 found (tickets.cy.js)                                                        │
+  │ Searched:       cypress/e2e/**/*.cy.js                                                         │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  tickets.cy.js                                                                   (1 of 1)
+
+
+  HelpDesk — E2E
+    √ показывает исходные заявки (165ms)
+    √ E-01: создание заявки через форму (1468ms)
+    √ E-02: поиск и фильтры по статусу и категории (634ms)
+    √ E-03: перевод заявки в работу и завершение (269ms)
+    1) E-04: HTML-разметка в тексте заявки остаётся текстом
+
+
+  4 passing (8s)
+  1 failing
+
+  1) HelpDesk — E2E
+       E-04: HTML-разметка в тексте заявки остаётся текстом:
+
+      Timed out retrying after 4000ms
+      + expected - actual
+
+      -'XSS-тест '
+      +'XSS-тест <img src=x onerror="window.__xss=1">'
+      
+      at Context.eval (webpack://isit4-autotest-helpdesk-lab/./cypress/e2e/tickets.cy.js:76:7)
+
+
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        5                                                                                │
+  │ Passing:      4                                                                                │
+  │ Failing:      1                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  1                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     8 seconds                                                                        │
+  │ Spec Ran:     tickets.cy.js                                                                    │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  C:\Users\user\Downloads\Практическая работа 4 Исит 4 курс\practice4-helpdesk\cyp     (1280x720)
+     ress\screenshots\tickets.cy.js\HelpDesk — E2E -- E-04 HTML-разметка в тексте зая               
+     вки остаётся текстом (failed).png                                                              
+
+
+====================================================================================================
+
+  (Run Finished)
+
+
+       Spec                                              Tests  Passing  Failing  Pending  Skipped  
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ ×  tickets.cy.js                            00:08        5        4        1        -        - │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ×  1 of 1 failed (100%)                     00:08        5        4        1        -        -  
+
