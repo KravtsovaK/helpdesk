@@ -60,6 +60,7 @@ function createApp({ seed, testMode = false } = {}) {
         category: url.searchParams.get('category'),
         priority: url.searchParams.get('priority')
       });
+      
         return sendJson(res, 200, { items, total: items.length });
       }
       if (req.method === 'POST' && pathname === '/api/tickets') {
