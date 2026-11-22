@@ -53,8 +53,10 @@ function filterAndSort(tickets, filters = {}) {
   const search = String(filters.search || '').trim().toLowerCase();
   const status = String(filters.status || '').trim();
   const category = String(filters.category || '').trim();
+  const priority = String(filters.priority || '').trim();
   return tickets
     .filter((ticket) => {
+      if (priority && ticket.priority !== priority) return false;
       if (status && ticket.status !== status) return false;
       if (category && ticket.category !== category) return false;
       if (!search) return true;

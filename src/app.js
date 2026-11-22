@@ -55,10 +55,11 @@ function createApp({ seed, testMode = false } = {}) {
       }
       if (req.method === 'GET' && pathname === '/api/tickets') {
         const items = store.list({
-          search: url.searchParams.get('search'),
-          status: url.searchParams.get('status'),
-          category: url.searchParams.get('category')
-        });
+        search: url.searchParams.get('search'),
+        status: url.searchParams.get('status'),
+        category: url.searchParams.get('category'),
+        priority: url.searchParams.get('priority')
+      });
         return sendJson(res, 200, { items, total: items.length });
       }
       if (req.method === 'POST' && pathname === '/api/tickets') {
